@@ -16,5 +16,23 @@ namespace App.Data.DataAccessTest
 
             Assert.IsTrue(cantidad > 0);
         }
+
+        [TestMethod]
+        public void GetArtists()
+        {
+            var da = new ArtistDA();
+            var listado = da.GetArtists();
+
+            Assert.IsTrue(listado.Count >= 0);
+        }
+
+        [TestMethod]
+        public void GetArtistsWitSP()
+        {
+            var da = new ArtistDA();
+            var listado = da.GetArtists("Aero%");
+
+            Assert.IsTrue(listado.Count >= 0);
+        }
     }
 }

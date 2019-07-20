@@ -60,6 +60,10 @@
       <Project>{d9127957-404b-4541-b3f8-330fc9c58c91}</Project>
       <Name>App.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\App.Entities.Base\App.Entities.Base.csproj">
+      <Project>{53b5b740-c8d9-4272-8249-e978446baf02}</Project>
+      <Name>App.Entities.Base</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

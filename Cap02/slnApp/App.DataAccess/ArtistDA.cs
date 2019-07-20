@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.Entities.Base;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace App.DataAccess
 {
-    public class ArtistDA
+    public class ArtistDA : BaseDA
     {
         /// <summary>
         /// Obtiene la cantidad de registros
@@ -23,10 +24,10 @@ namespace App.DataAccess
                 //Consulta SQL
                 var sql = "SELECT COUNT(ArtistId) FROM Artist";
 
-                var cnxString = "SERVER=S300-ST;DataBase=Chinook; USER ID=sa; PASSWORD=sql";
+                //var cnxString = "SERVER=S300-ST;DataBase=Chinook; USER ID=sa; PASSWORD=sql";
 
                 //2 - Crear el objeto connection
-                using (IDbConnection cnx = new SqlConnection(cnxString))
+                using (IDbConnection cnx = new SqlConnection(ConnectionString))
                 {
                     //Abriendo la conexión a la base de datos
                     cnx.Open();
@@ -37,11 +38,83 @@ namespace App.DataAccess
                     cmd.CommandText = sql;
                     result = (int)cmd.ExecuteScalar();
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 result = -1;
             }
-           
+
+            return result;
+        }
+
+        public List<Artist> GetArtists()
+        {
+            var result = new List<Artist>();
+            var sql = "SELECT * FROM Artist";
+
+            using (IDbConnection cnx = new SqlConnection(ConnectionString))
+            {
+                cnx.Open();
+
+                var cmd = cnx.CreateCommand();
+                cmd.CommandText = sql;
+                var indice = 0;
+
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var artist = new Artist();
+                    //artist.ArtistId = reader.GetInt32(0);
+                    //artist.Name = reader.GetString(1);
+                    indice = reader.GetOrdinal("ArtistId");
+                    artist.ArtistId = reader.GetInt32(indice);
+                    //artist.ArtistId = Convert.ToInt32(reader["ArtistId"]);
+                    indice = reader.GetOrdinal("Name");
+                    artist.Name = reader.GetName(indice);
+                    
+                    result.Add(artist);
+                }
+            }
+
+            return result;
+        }
+
+        public List<Artist> GetArtists(string filtroPorNombre)
+        {
+            var result = new List<Artist>();
+            var sql = "usp_GetArtist";
+
+            using (IDbConnection cnx = new SqlConnection(ConnectionString))
+            {
+                cnx.Open();
+
+                var cmd = cnx.CreateCommand();
+                cmd.CommandText = sql;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //Configurando los parametros
+                cmd.Parameters.Add(
+                    new SqlParameter("@Nombre", filtroPorNombre)
+                );
+                
+                var indice = 0;
+
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var artist = new Artist();
+                    indice = reader.GetOrdinal("ArtistId");
+                    artist.ArtistId = reader.GetInt32(indice);
+
+                    indice = reader.GetOrdinal("Name");
+                    artist.Name = reader.GetName(indice);
+
+                    result.Add(artist);
+                }
+            }
+
             return result;
         }
     }
