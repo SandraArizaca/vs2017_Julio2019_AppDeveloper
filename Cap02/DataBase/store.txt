@@ -1,0 +1,80 @@
+
+CREATE procedure [dbo].[usp_getArtist]
+(
+@Nombre nvarchar(100)
+)
+as BEGIN
+select * from Artist where @Nombre='' or Name like @Nombre
+END
+
+
+create procedure usp_InsertArtist
+(
+@Name nvarchar(120)
+)
+as
+begin
+	insert into Artist(Name) values (@Name)
+			
+			select SCOPE_IDENTITY()
+end
+
+
+
+
+
+create procedure usp_InsertArtistParamOut
+(
+  @Name nvarchar(120),
+  @ID int output
+)
+as
+begin
+	insert into Artist(Name) values (@Name)
+			
+			set @ID = SCOPE_IDENTITY()
+end
+
+
+
+create procedure usp_updateArtist
+(
+  @Name nvarchar(120),
+  @ID int output
+)
+as
+begin
+	update artist
+	set Name = @Name
+	where ArtistId=@ID
+
+end
+
+
+create procedure usp_deleteArtist
+(
+@id int
+)
+as
+begin
+
+delete 
+from Artist
+where ArtistId = @id
+end
+
+
+
+
+	create procedure usp_getArtistbyID
+	(
+	@ID int
+	)
+	as
+	begin
+
+	select *
+	from Artist
+	where ArtistId = @ID
+
+	end
