@@ -31,9 +31,9 @@ namespace App.Data.DataAccess
                     var customer = new Customer();
 
 
-                    customer.CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
-                    customer.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
-                    customer.LastName = reader.GetString(reader.GetOrdinal("LastName"));
+                    customer.CustomerId = reader.GetInt32Value("CustomerId");
+                    customer.FirstName = reader.GetStringValue("FirstName");
+                    customer.LastName = reader.GetStringValue("LastName");
 
                     customer.Company = reader.GetStringValue("Company");
 

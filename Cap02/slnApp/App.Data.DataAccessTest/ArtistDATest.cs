@@ -83,13 +83,6 @@ namespace App.Data.DataAccessTest
 
             var artistaUpdated = da.GetArtistById(codigoGenerado);
             Assert.IsTrue(artistaUpdated.Name== "Artista prueba nuevo actualizado");
-
-
-
-
         }
-
-
-
     }
 }
