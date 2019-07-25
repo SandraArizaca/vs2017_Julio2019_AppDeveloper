@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5C06E824-76EA-427D-9B88-860316805F84}</ProjectGuid>
+    <ProjectGuid>{A5C03AF0-FC67-42C3-9F7D-120D390AADCC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>App.Data.DataAccessTest</RootNamespace>
@@ -56,12 +56,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\App.DataAccess\App.DataAccess.csproj">
-      <Project>{d9127957-404b-4541-b3f8-330fc9c58c91}</Project>
-      <Name>App.DataAccess</Name>
+    <ProjectReference Include="..\App.Data.DataAccess\App.Data.DataAccess.csproj">
+      <Project>{3a921928-8418-42e8-9836-ba48e15a0f99}</Project>
+      <Name>App.Data.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\App.Entities.Base\App.Entities.Base.csproj">
-      <Project>{53b5b740-c8d9-4272-8249-e978446baf02}</Project>
+      <Project>{1a9f2b2f-3735-472c-9c6d-422e62170281}</Project>
       <Name>App.Entities.Base</Name>
     </ProjectReference>
   </ItemGroup>
