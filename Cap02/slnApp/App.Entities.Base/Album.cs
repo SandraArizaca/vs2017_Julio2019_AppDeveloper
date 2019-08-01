@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace App.Entities.Base
 {
-    public class Artist
+    public class Album
     {
-        public int ArtistId { get; set; }
-        public string Name { get; set; }
-        public List<Album> Album { get; set; }
+        public int AlbumId { get; set; }
+        public string Title { get; set; }
     }
 }
