@@ -1,4 +1,5 @@
-﻿using DapperDAL;
+﻿using App.Entities.Base;
+using DapperDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,22 @@ namespace ConsolaDePruebas
     {
         static void Main(string[] args)
         {
-            ArtistDapperDAL artistDapperDAL = new ArtistDapperDAL();
-            var artist = artistDapperDAL.GetArtistById(2);
-            Console.WriteLine(artist.Name);
-            artist.Album.ForEach(album =>
+            AlumnoDapperDAL alumnoDapperDAL = new AlumnoDapperDAL();
+            alumnoDapperDAL.RegisterAlumno(new Alumno()
             {
-                Console.WriteLine(album.Title);
+                NombreCompleto = "Hugo Caja Manzanal",
+                FechaNacimiento = null,
+                TerminoEstudios = null
+            });
+            alumnoDapperDAL.RegisterAlumno(new Alumno()
+            {
+                NombreCompleto = "Patricia Flores Rosas",
+                FechaNacimiento = Convert.ToDateTime("02/07/1987"),
+                TerminoEstudios = null
+            });
+            alumnoDapperDAL.ListAllAlumnos().ForEach(alumno =>
+            {
+                Console.WriteLine($"{alumno.Id}) {alumno.NombreCompleto}");
             });
 
             Console.ReadKey();
@@ -42,6 +53,36 @@ namespace ConsolaDePruebas
             invoice.InvoiceLine.ForEach(line =>
             {
                 Console.WriteLine(line.TrackId);
+            });
+        }
+
+        private static void ListArtist()
+        {
+            ArtistDapperDAL artistDapperDAL = new ArtistDapperDAL();
+            var artist = artistDapperDAL.GetArtistById(2);
+            Console.WriteLine(artist.Name);
+            artist.Album.ForEach(album =>
+            {
+                Console.WriteLine(album.Title);
+            });
+        }
+
+        private static void ListProductosInsertados()
+        {
+            ProductDapperDAL productDapperDAL = new ProductDapperDAL();
+            productDapperDAL.RegisterProduct(new Product()
+            {
+                Name = "Chocolate",
+                Description = "Es un Chocolate"
+            });
+            productDapperDAL.RegisterProduct(new Product()
+            {
+                Name = "Pecana",
+                Description = "Es una Pecana"
+            });
+            productDapperDAL.ListAllProducts().ForEach(product =>
+            {
+                Console.WriteLine($"{product.Id}) {product.Name}");
             });
         }
     }
