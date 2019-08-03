@@ -23,5 +23,27 @@ namespace DapperDAL
                 }
             }
         }
+
+        public List<Invoice> GetInvoiceListById(List<int> ids)
+        {
+            using (IDbConnection connection = this.getConnection())
+            {
+                connection.Open();
+                using (var multi = connection.QueryMultiple(
+                    "GetInvoicesByIds",
+                    new { Ids = ids.AsTableOfInts() },
+                    commandType: CommandType.StoredProcedure))
+                {
+                    var invoices = multi.Read<Invoice>().ToList();
+                    var InvoiceLines = multi.Read<InvoiceLine>().ToList();
+
+                    invoices.ForEach(invoice =>
+                    {
+                        invoice.InvoiceLine = InvoiceLines.Where(line => line.InvoiceId.Equals(invoice.InvoiceId)).ToList();
+                    });
+                    return invoices;
+                }
+            }
+        }
     }
 }

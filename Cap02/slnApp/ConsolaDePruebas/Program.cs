@@ -12,22 +12,19 @@ namespace ConsolaDePruebas
     {
         static void Main(string[] args)
         {
-            AlumnoDapperDAL alumnoDapperDAL = new AlumnoDapperDAL();
-            alumnoDapperDAL.RegisterAlumno(new Alumno()
+            InvoiceDapperDAL invoiceDapperDAL = new InvoiceDapperDAL();
+            var invoices = invoiceDapperDAL.GetInvoiceListById(new List<int>()
             {
-                NombreCompleto = "Hugo Caja Manzanal",
-                FechaNacimiento = null,
-                TerminoEstudios = null
+                1,2,3
             });
-            alumnoDapperDAL.RegisterAlumno(new Alumno()
+            invoices.ForEach(x =>
             {
-                NombreCompleto = "Patricia Flores Rosas",
-                FechaNacimiento = Convert.ToDateTime("02/07/1987"),
-                TerminoEstudios = null
-            });
-            alumnoDapperDAL.ListAllAlumnos().ForEach(alumno =>
-            {
-                Console.WriteLine($"{alumno.Id}) {alumno.NombreCompleto}");
+                Console.WriteLine($"Cabecera con Id { x.InvoiceId}");
+                x.InvoiceLine.ForEach(y =>
+                {
+                    Console.WriteLine($"    Con Detalle con Id { y.InvoiceLineId}");
+
+                });
             });
 
             Console.ReadKey();
@@ -83,6 +80,27 @@ namespace ConsolaDePruebas
             productDapperDAL.ListAllProducts().ForEach(product =>
             {
                 Console.WriteLine($"{product.Id}) {product.Name}");
+            });
+        }
+
+        private static void ListAlumnosInsertados()
+        {
+            AlumnoDapperDAL alumnoDapperDAL = new AlumnoDapperDAL();
+            alumnoDapperDAL.RegisterAlumno(new Alumno()
+            {
+                NombreCompleto = "Hugo Caja Manzanal",
+                FechaNacimiento = null,
+                TerminoEstudios = null
+            });
+            alumnoDapperDAL.RegisterAlumno(new Alumno()
+            {
+                NombreCompleto = "Patricia Flores Rosas",
+                FechaNacimiento = Convert.ToDateTime("02/07/1987"),
+                TerminoEstudios = null
+            });
+            alumnoDapperDAL.ListAllAlumnos().ForEach(alumno =>
+            {
+                Console.WriteLine($"{alumno.Id}) {alumno.NombreCompleto}");
             });
         }
     }

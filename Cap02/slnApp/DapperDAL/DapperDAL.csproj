@@ -52,6 +52,7 @@
     <Compile Include="ArtistDapperDAL.cs" />
     <Compile Include="CustomerDapperDAL.cs" />
     <Compile Include="DALBase.cs" />
+    <Compile Include="IdListExtension.cs" />
     <Compile Include="InvoiceDapperDAL.cs" />
     <Compile Include="ProductDapperDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
