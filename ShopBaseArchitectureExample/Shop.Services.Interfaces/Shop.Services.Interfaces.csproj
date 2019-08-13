@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{052F3268-3D17-40FC-86FC-44F2519FFF6C}</ProjectGuid>
+    <ProjectGuid>{FA98126D-3EBF-4E81-B748-1A3C0454ECD3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shop.Domain.Entities</RootNamespace>
-    <AssemblyName>Shop.Domain.Entities</AssemblyName>
+    <RootNamespace>Shop.Services.Interfaces</RootNamespace>
+    <AssemblyName>Shop.Services.Interfaces</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,13 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Employe.cs" />
-    <Compile Include="Product.cs" />
-    <Compile Include="Category.cs" />
+    <Compile Include="Handlers\IProductHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SalesTurn.cs" />
-    <Compile Include="Shared\Enums\Sex.cs" />
-    <Compile Include="Shared\TBaseEntity.cs" />
+    <Compile Include="Requests\CreateProducto.cs" />
+    <Compile Include="Responses\RegisteredCategory.cs" />
+    <Compile Include="Responses\RegisteredProduct.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
