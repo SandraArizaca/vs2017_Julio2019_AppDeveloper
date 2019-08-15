@@ -1,0 +1,14 @@
+
+    h1{
+        color: red;
+    }
+    #titulo{
+        color: blue;
+    }
+    .ElementoVerde{
+        color: green;
+    }
+
+    .LetraChica{
+        font-size: 80%;
+    }
